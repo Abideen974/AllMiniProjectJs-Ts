@@ -12,6 +12,9 @@ function Dashborad() {
     if(!localStorage.getItem('user-info')){
       history.push('/')
     }
+    // if(localStorage.getItem('user-info')){
+    //   history.push('Dashborad')
+    // }
     
 },[])
 const Logout = () =>{

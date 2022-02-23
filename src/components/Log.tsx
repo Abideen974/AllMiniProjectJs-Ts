@@ -7,14 +7,12 @@ import { useHistory } from "react-router-dom";
 
 function Log() {
 
-//   useEffect(()=>{
-//     if(localStorage.getItem('user-info')){
-//       history.push('./Dashborad')
-//     }
-//     // else{
-//     //   history.push('Signup')
-//     // }
-// },[])
+  useEffect(()=>{
+    if(localStorage.getItem('user-info')){
+      history.push('./Dashborad')
+    }
+   
+},[])
 
   const [phone, setPhone] = useState<any>();
     const [password , setPassword] = useState<any>();
@@ -24,75 +22,72 @@ function Log() {
     const [alrt , setAlrt] =useState<any>(null);
 
     let history = useHistory();
+
+    async function login(){
+      // console.log(phone, password)
+    let result = await fetch('https://laborappbackend.herokuapp.com/v1/api/login-user',{
+        method: 'POST',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({phone, password})
+      })
+      result= await result.json();
+      console.log(result);
+      localStorage.setItem('user-info', JSON.stringify(result))
+      if("user-info" in localStorage){
+          alert("Please Enter Number and Password")
+      }
+      else{
+
+        history.push('./Dashborad')
+      }
+    }
   //  let emal = "Abideen@gmail.com";
   //  let pasword = "abideen"
-    const login = () =>{
+
+//     const login = () =>{
       
-        fetch('https://laborappbackend.herokuapp.com/v1/api/login-user',{
-          method :'POST',
-          headers: {
-            'Accept':'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ phone, password  }
-          )
-        }).then((result)=>{
-          return result.json()
-        })
-        .then((response)=>{
-          if(response.accessToken){
+//         fetch('https://laborappbackend.herokuapp.com/v1/api/login-user',{
+//           method :'POST',
+//           headers: {
+//             'Accept':'application/json',
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({ phone, password  }
+//           )
+//         }).then((result)=>{
+//           return result.json()
+//         })
+//         .then((response)=>{
+//           if(response.accessToken){
             
-            console.warn("inside response" ,response)
-            setUsers(history.push("./Dashborad"));
+//             console.warn("inside response" ,response)
+//             setUsers(history.push("./Dashborad"));
            
-          }
-          else{
-          setUsers(history.push("./Error"));
+//           }
 
-          }
          
-        })
-        .catch((error)=>{
-          setUsers(history.push("./Error"));
-          // alert("Error")
-          console.warn("inside ree" ,error)
-        })
-        // console.log(e) 
+//         })
+//         .catch((error)=>{
+//           setUsers(history.push("./Error"));
+//           console.warn("inside ree" ,error)
+//         });
+       
 
-        
-
-}
+// }
 
 
 
-    
-      //   if(email === emal && password === pasword){
-      //       console.log("login Successfully");
-      //       history.push("/Dashborad");
-      //   }
-      // else if (email ==="" && password ===""){
-      //   alert("Please fil out the form")
-      //   console.log("empty")
-      // }
 
-      // else if(email !== emal && password  !== pasword){
-      //     history.push("/Error")
-      //   }
-      //   else {
-      //     history.push("/Login");
-      //   }
-      // useEffect(()=>{
-        
-      // },[])
+  
         
       
   return (
 
     <div>
-      {/* {
-          alert("Something went wrong")
-
-      } */}
+   
         <Box
                         component="form"
                         sx={{

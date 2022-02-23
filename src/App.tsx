@@ -36,7 +36,7 @@ function App() {
        <Router>
                 <Switch>
                     <Route exact path="/">
-                        <Log />
+                        <Protected Cmp={Log} />
                     </Route>
                     <Route path="/Dashborad">
                         <Protected Cmp={Dashborad} />
@@ -46,8 +46,11 @@ function App() {
                         <Error />
                     </Route>
                     <Route path="/Signup">
-                       <Signup />
+                       <Protected Cmp={Signup} />
                     </Route>
+                    {/* <Route path="/Signup">
+                       <Protected Cmp={Signup} />
+                    </Route> */}
                 </Switch>
             </Router>  
         

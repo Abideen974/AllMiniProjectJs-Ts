@@ -6,14 +6,11 @@ import { useHistory } from "react-router-dom";
 
 
 function Signup() {
-  // useEffect(()=>{
-  //     if(localStorage.getItem('user-info')){
-  //       history.push('/')
-  //     }
-  //     // else{
-  //     //   history.push('Signup')
-  //     // }
-  // },[])
+  useEffect(()=>{
+      if(localStorage.getItem('user-info')){
+        history.push('/Dashborad')
+      }
+  },[])
  
 
     const [password , setPassword] = useState<any>("");
