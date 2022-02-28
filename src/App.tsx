@@ -19,12 +19,16 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import AdminD from "./components/AdminD";
+import ReactDashboard from "./components/ReactDashboard";
+import AdminDash from "./components/AdminDash";
+import MaterialAdmin from "./components/MaterialAdmin";
 
 
 
 function App() {
   return (
-    <div className="App">
+    <div >
       {/* <Down /> */}
       {/* <Changbackground />, */}
       {/* <BoxSx /> */}
@@ -35,7 +39,7 @@ function App() {
  
        <Router>
                 <Switch>
-                    <Route exact path="/">
+                    {/* <Route exact path="/">
                         <Protected Cmp={Log} />
                     </Route>
                     <Route path="/Dashborad">
@@ -47,12 +51,16 @@ function App() {
                     </Route>
                     <Route path="/Signup">
                        <Protected Cmp={Signup} />
-                    </Route>
+                    </Route> */}
                     {/* <Route path="/Signup">
                        <Protected Cmp={Signup} />
                     </Route> */}
                 </Switch>
             </Router>  
+            {/* <AdminD /> */}
+            {/* <ReactDashboard /> */}
+            {/* <AdminDash /> */}
+            <MaterialAdmin />
         
 
 
