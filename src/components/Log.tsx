@@ -2,28 +2,37 @@ import React,{useState,useEffect} from 'react'
 import TextField  from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { useHistory } from "react-router-dom";
 
 function Log() {
 
   useEffect(()=>{
-    if(localStorage.getItem('user-info')){
+    if(localStorage.getItem('accessToken')){
       history.push('./Dashborad')
     }
    
 },[])
 
-  const [phone, setPhone] = useState<any>();
+    const [phone, setPhone] = useState<any>();
     const [password , setPassword] = useState<any>();
     const [users, setUsers] = useState<any>([])
-    const [response, setResponse] =useState<any>(true);
+    const [response, setResponse] =useState<any>();
 
     const [alrt , setAlrt] =useState<any>(null);
 
     let history = useHistory();
 
     async function login(){
+      
+  //     const data = 
+  // {
+  //         phone : "phone",
+  //         password : "password"
+  //       }
+      
       // console.log(phone, password)
     let result = await fetch('https://laborappbackend.herokuapp.com/v1/api/login-user',{
         method: 'POST',
@@ -33,17 +42,29 @@ function Log() {
         },
         body: JSON.stringify({phone, password})
       })
-      result= await result.json();
-      console.log(result);
-      localStorage.setItem('user-info', JSON.stringify(result))
-      if("user-info" in localStorage){
-          alert("Please Enter Number and Password")
+     let data= await result.json();
+      console.log(data);
+      if(data.accessToken){
+        toast.success("Login Successfull!",{
+          position:"bottom-center"
+
+        });
+        setTimeout(() => {
+          history.push('/Dashborad');
+          
+        }, 6000);
       }
       else{
+        toast.error("Please fil out the correct information!",{
+          position:"bottom-center"
 
-        history.push('./Dashborad')
+        });
       }
-    }
+        
+      
+      localStorage.setItem('accessToken', JSON.stringify(result))
+      
+      }
   //  let emal = "Abideen@gmail.com";
   //  let pasword = "abideen"
 
@@ -123,6 +144,7 @@ function Log() {
 
                       </Box>
                       <Button variant='contained' onClick={login}>Login</Button>
+                      <ToastContainer />
 
     </div>
   )
@@ -141,3 +163,5 @@ export default Log
 
 // // SignIn
 // //  data: { phone, password },
+
+//  GET https://data.fixer.io/api/latest

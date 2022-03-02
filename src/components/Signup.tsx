@@ -3,11 +3,13 @@ import TextField  from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Signup() {
   useEffect(()=>{
-      if(localStorage.getItem('user-info')){
+      if(localStorage.getItem('accessToken')){
         history.push('/Dashborad')
       }
   },[])
@@ -39,8 +41,25 @@ function Signup() {
         });
         result = await result.json();
         console.warn("Inside the result", result);
-        localStorage.setItem("user-info",JSON.stringify(result));
-        history.push("/")
+        
+     
+        if(!phone || !text || !id || !password){
+          console.warn("inside the khali")
+          toast.error("plz fill out the form",{
+            position:"bottom-center"
+            
+          })
+          
+        }else{
+          localStorage.setItem("accessToken",JSON.stringify(result));
+          console.warn("inside the fillllll")
+          toast.success("Successfully Signup Now you can login",{
+            position:"bottom-center"
+  
+          })
+        }
+        // console.log(result.accessToken)
+        // history.push("/")
       }
         // .then((result) =>{
         //     // console.warn('result',result)
@@ -116,6 +135,7 @@ function Signup() {
 
                       </Box>
                       <Button onClick={signup} variant="contained">Signup</Button>
+                      <ToastContainer />
     </div>
   )
 }

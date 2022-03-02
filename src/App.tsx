@@ -27,8 +27,9 @@ import MaterialAdmin from "./components/MaterialAdmin";
 
 
 function App() {
+  const user = true;
   return (
-    <div >
+    <div className="App" >
       {/* <Down /> */}
       {/* <Changbackground />, */}
       {/* <BoxSx /> */}
@@ -39,28 +40,31 @@ function App() {
  
        <Router>
                 <Switch>
-                    {/* <Route exact path="/">
+                    <Route exact path="/">
                         <Protected Cmp={Log} />
+                        {/* <Log /> */}
                     </Route>
                     <Route path="/Dashborad">
+                        {user? <Redirect to="/Dashborad" /> : <Log />}
                         <Protected Cmp={Dashborad} />
-
-                    </Route>
+                      </Route>
+                    
                     <Route path="/Error">
                         <Error />
                     </Route>
                     <Route path="/Signup">
                        <Protected Cmp={Signup} />
-                    </Route> */}
-                    {/* <Route path="/Signup">
-                       <Protected Cmp={Signup} />
-                    </Route> */}
+                       {/* <Signup /> */}
+                    </Route> 
+                     <Route path="/Sig.mnup">
+                       {/* <Protected Cmp={Signup} /> */}
+                    </Route>
                 </Switch>
             </Router>  
             {/* <AdminD /> */}
             {/* <ReactDashboard /> */}
             {/* <AdminDash /> */}
-            <MaterialAdmin />
+            {/* <MaterialAdmin /> */}
         
 
 
